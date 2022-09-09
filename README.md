@@ -8,8 +8,8 @@ A simple but powerful ransomware to hone your red team skills. This is one of a 
 ## 🔧🔨 USAGE
 1. Clone this repository( You can also just download it. )
     ```sh
-        git clone https://github.com/winterrdog/PySomCryptware.git 
-        cd PySomCryptware
+    git clone https://github.com/winterrdog/PySomCryptware.git 
+    cd PySomCryptware
     ```
 2. Install the required packages to fix dependency problems ahead of time:
     - On Unix,
