@@ -7,38 +7,49 @@ A simple but powerful ransomware to hone your red team skills. This is one of a 
 * `pip` should be installed. if not follow [this](https://command-not-found.com/pip) for Linux and others should follow [this](https://pip.pypa.io/en/stable/installation/#supported-methods)
 ## 🔧🔨 USAGE
 1. Clone this repository( You can also just download it. )
-```sh
-    git clone https://github.com/winterrdog/PySomCryptware.git 
-    cd PySomCryptware
-```
-2. Encryption is achieved like this: 
-      - On Unix,
-      ```sh 
-      python ./main.py
-    ``` 
-     or 
-     ```sh
-     python ./main.py -a encrypt
+    ```sh
+        git clone https://github.com/winterrdog/PySomCryptware.git 
+        cd PySomCryptware
     ```
-     - On Windows( in `cmd` or `powershell` ), 
-     ```powershell
-     py ./main.py
-     ``` 
-     or 
-     ```powershell
-     py ./main.py -a encrypt
-     ```
+2. Install the required packages to fix dependency problems ahead of time:
+    - On Unix,
+        ```sh
+        pip install -r requirements.txt
+        ```
+    - On Windows,
+        ```powershell
+        pip install -r requirements.txt
+        ```
+3. Encryption is achieved like this: 
+    - On Unix,
+        ```sh 
+        python ./main.py
+        ``` 
+        or 
+        ```sh
+        python ./main.py -a encrypt
+        ```
+    - On Windows( in `powershell` ), 
+        ```powershell
+        py ./main.py
+        ``` 
+        or 
+        ```powershell
+        py ./main.py -a encrypt
+        ```
 3. Decryption( reverse encryption ) is achieved like this: 
-      - On Unix,
-          ```sh
-      python ./main.py -a decrypt
-      ```
-      - On Windows( in `cmd` or `powershell` ),
-         ```powershell
-      py ./main.py -a decrypt
-      ```
+    - On Unix,
+        ```sh
+        python ./main.py -a decrypt
+        ```
+    - On Windows( in `powershell` ),
+        ```powershell
+        py ./main.py -a decrypt
+        ```
 ## NOTE:
-Only for educational purposes, man! I'm not responsible for your actions
+* Only for educational purposes, man! I'm not responsible for your actions
 and in case I forgot to explain something, please endeavor to read the code as it can explain a lot more than I can, don't be a `skiddie`. Go hard instead!
+* For any problems with the code, you can always send in an issue or make a pull request( much better :) ).
+
 ##  Contributions
 They're always welcome with open hands as long as they're for the good of the community. You are also free to push this code further
