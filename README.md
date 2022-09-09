@@ -47,6 +47,7 @@ A simple but powerful ransomware to hone your red team skills. This is one of a 
         py ./main.py -a decrypt
         ```
 ## NOTE:
+* The default file path where encryption starts is the current directory(`./`). You can change it in the code( at *line 16* in `main.py` ). There's a better way of doing it( using command line arguments ) but I'm kinda lazy right now 🥲.
 * Only for educational purposes, man! I'm not responsible for your actions
 and in case I forgot to explain something, please endeavor to read the code as it can explain a lot more than I can, don't be a `skiddie`. Go hard instead!
 * For any problems with the code, you can always send in an issue or make a pull request( much better :) ).
