@@ -5,7 +5,7 @@ __author__ = "winterrdog"
 __license__ = "GPL 3.0"
 __version__ = "1.0.0"
 __email__ = "winterrdog@protonmail.ch"
-__status__ = "Development"
+__status__ = "dev"
 
 from lib import core
 
